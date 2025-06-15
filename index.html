@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mi Tienda - Grupo 412</title>
+<style>
+  :root {
+    --primary-color: #2563eb;
+    --secondary-color: #dc2626;
+    --accent-color: #059669;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--background);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 2rem 1rem;
+    text-align: center;
+    color: white;
+    box-shadow: var(--shadow-lg);
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 700;
+    animation: titulo-animado 2s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes titulo-animado {
+    0% { opacity: 0; transform: translateY(-20px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+
+  nav {
+    background: var(--card-bg);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+  }
+
+  nav a:hover, nav a.active {
+    background: var(--primary-color);
+    color: white;
+    border-bottom-color: var(--secondary-color);
+  }
+
+  main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .integrantes h2 {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .integrantes ul {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .integrantes li {
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+  }
+
+  .integrantes p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-top: 1.5rem;
+  }
+
+  .catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .producto {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .producto:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+  }
+
+  .producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .producto-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .producto h3 {
+    margin: 0 0 0.5rem;
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .producto p {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+
+  .producto .precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-accent {
+    background: var(--accent-color);
+    color: white;
+  }
+
+  .btn-accent:hover {
+    background: #047857;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Paginación */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .pagination button {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .pagination button:hover, .pagination button.active {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Carrito */
+  aside.carrito {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    width: 380px;
+    max-height: 80vh;
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-lg);
+    padding: 1.5rem;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 12px 0 0 12px;
+  }
+
+  aside.carrito h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  ul.lista-carrito {
+    list-style: none;
+    padding-left: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  ul.lista-carrito li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+
+  ul.lista-carrito li:hover {
+    background: #e2e8f0;
+  }
+
+  ul.lista-carrito img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+
+  ul.lista-carrito .info {
+    flex-grow: 1;
+  }
+
+  ul.lista-carrito .info p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  ul.lista-carrito .precio {
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  ul.lista-carrito button.borrar {
+    background: var(--secondary-color);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  ul.lista-carrito button.borrar:hover {
+    background: #b91c1c;
+    transform: scale(1.1);
+  }
+
+  .total-carrito {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  /* Sección contacto */
+  section#contacto h2 {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  section#contacto p {
+    margin: 0.5rem 0 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-light);
+  }
+
+  .mapa {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--text-dark);
+    color: white;
+    margin-top: 4rem;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px) {
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+    }
+
+    nav a {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    aside.carrito {
+      position: static;
+      width: 100%;
+      max-height: none;
+      border-left: none;
+      border-top: 4px solid var(--primary-color);
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+      border-radius: 12px;
+    }
+
+    .catalogo {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .integrantes ul {
+      grid-template-columns: 1fr;
+    }
+
+    main {
+      padding: 0 0.5rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media(max-width: 480px) {
+    nav {
+      flex-direction: column;
+    }
+
+    nav a {
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      border-radius: 0;
+    }
+
+    .catalogo {
+      grid-template-columns: 1fr;
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bienvenidos a Nuestra Tienda - Grupo 412</h1>
+</header>
+
+<nav>
+  <a href="#inicio" onclick="mostrarSeccion('inicio')" class="nav-link active">Inicio</a>
+  <a href="#catalogo" onclick="mostrarSeccion('catalogo')" class="nav-link">Catálogo</a>
+  <a href="#contacto" onclick="mostrarSeccion('contacto')" class="nav-link">Contacto</a>
+  <a href="#escatepec" onclick="mostrarSeccion('escatepec')" class="nav-link">Escatepec</a>
+</nav>
+
+<main>
+  <!-- Inicio -->
+  <section id="inicio" style="display:block;">
+    <div class="card integrantes">
+      <h2>Integrantes del Grupo 412</h2>
+      <ul>
+        <li>Hannah Charbel Morales Ramírez</li>
+        <li>Melani Naomi Díaz Fragoso</li>
+        <li>Giovany Aldair Cornelio Mandujano</li>
+        <li>Yolanda Melani Casasola Fonseca</li>
+        <li>Midori Natasha Hernández Laos</li>
+        <li>Aranda Ponce Luis Ernesto</li>
+      </ul>
+      <p>Bienvenidos a nuestra página web. Aquí encontrarás una gran variedad de productos con la mejor calidad y atención personalizada. Nuestro compromiso es ofrecerte la mejor experiencia de compra con productos de alta calidad y servicio excepcional.</p>
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <section id="catalogo" style="display:none;">
+    <div class="catalogo" id="catalogo-productos">
+      <!-- Productos generados por JS -->
+    </div>
+    <div class="pagination" id="pagination">
+      <!-- Paginación generada por JS -->
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" style="display:none;">
+    <div class="card">
+      <h2>Contacto</h2>
+      <p><strong>Dirección:</strong> CECyTEM Plantel Ecatepec - Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca, 55020 Ecatepec de Morelos, México</p>
+      <p><strong>Teléfono:</strong> +52 55 1234 5678</p>
+      <p><strong>Email:</strong> contacto@grupo412.com</p>
+      <p><strong>WhatsApp:</strong> <a href="https://wa.me/525515764800" target="_blank" style="color: var(--accent-color); font-weight: bold;">Enviar mensaje</a></p>
+
+      
+<div class="mapa">
+  
+
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3760.175774453522!2d-99.02816832418825!3d19.531890281765998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f0b10558839d%3A0x69d8ae8bcb16496!2sCECyTEM%20Plantel%20Ecatepec!5e0!3m2!1ses!2smx!4v1718472000000!5m2!1ses!2smx"
+  width="100%" height="400" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+
+</div>
+
+    </div>
+  </section>
+
+<!-- Formulario y enlace Escatepec -->
+<section id="escatepec" class="card" style="margin-top: 2rem;">
+  <h2>Formulario de Consulta</h2>
+  <form action="https://Localhost//paginas_php/nombre.php" method="post" target="_blank">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required style="padding: 0.5rem; width: 100%; margin-bottom: 1rem;"><br>
+
+    <label for="mensaje">Mensaje:</label><br>
+    <textarea id="mensaje" name="mensaje" rows="4" required style="padding: 0.5rem; width: 100%; margin-bottom: 1rem;"></textarea><br>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+  <p style="margin-top: 1.5rem;">
+    También puedes <a href="https://Localhost//paginas_php/nombre.php" target="_blank" style="color: var(--accent-color); font-weight: bold;">visitar la página de Escatepec</a> directamente.
+  </p>
+</section>
+
+</main>
+
+<!-- Carrito -->
+<aside class="carrito" style="display:none;"
+  <h2>🛒 Carrito de Compra</h2>
+  <ul class="lista-carrito" id="lista-carrito"></ul>
+  <div class="total-carrito">
+    <strong>Total: $<span id="total">0.00</span></strong>
+  </div>
+  <button id="finalizar" class="btn btn-accent" style="width: 100%;">Finalizar Venta</button>
+</aside>
+
+<footer>
+  &copy; 2025 Grupo 412 - Todos los derechos reservados
+</footer>
+
+<script src="catalogo.js"></script>
+
+
+
+<!-- Botón flotante para mostrar/ocultar carrito -->
+<button onclick="toggleCarrito()" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 1100;
+" title="Mostrar/Ocultar carrito">🛒</button>
+
+
+<!-- Botón modo oscuro/claro -->
+<button onclick="toggleModo()" style="
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: var(--text-dark);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 1100;
+" title="Cambiar modo">🌗</button>
+
+</body>
+</html>
