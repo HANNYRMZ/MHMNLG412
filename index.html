@@ -1,0 +1,1076 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mi Tienda - Grupo 412</title>
+<style>
+  :root {
+    --primary-color: #2563eb;
+    --secondary-color: #dc2626;
+    --accent-color: #059669;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--background);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 2rem 1rem;
+    text-align: center;
+    color: white;
+    box-shadow: var(--shadow-lg);
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 700;
+    animation: titulo-animado 2s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes titulo-animado {
+    0% { opacity: 0; transform: translateY(-20px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+
+  nav {
+    background: var(--card-bg);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+  }
+
+  nav a:hover, nav a.active {
+    background: var(--primary-color);
+    color: white;
+    border-bottom-color: var(--secondary-color);
+  }
+
+  main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .integrantes h2 {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .integrantes ul {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .integrantes li {
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+  }
+
+  .integrantes p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-top: 1.5rem;
+  }
+
+  .catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .producto {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .producto:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+  }
+
+  .producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .producto-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .producto h3 {
+    margin: 0 0 0.5rem;
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .producto p {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+
+  .producto .precio {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-accent {
+    background: var(--accent-color);
+    color: white;
+  }
+
+  .btn-accent:hover {
+    background: #047857;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Paginación */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+
+  .pagination button {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .pagination button:hover, .pagination button.active {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Carrito */
+  aside.carrito {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    width: 380px;
+    max-height: 80vh;
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-lg);
+    padding: 1.5rem;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 12px 0 0 12px;
+  }
+
+  aside.carrito h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  ul.lista-carrito {
+    list-style: none;
+    padding-left: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  ul.lista-carrito li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+
+  ul.lista-carrito li:hover {
+    background: #e2e8f0;
+  }
+
+  ul.lista-carrito img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+
+  ul.lista-carrito .info {
+    flex-grow: 1;
+  }
+
+  ul.lista-carrito .info p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  ul.lista-carrito .precio {
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  ul.lista-carrito button.borrar {
+    background: var(--secondary-color);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  ul.lista-carrito button.borrar:hover {
+    background: #b91c1c;
+    transform: scale(1.1);
+  }
+
+  .total-carrito {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  /* Sección contacto */
+  section#contacto h2 {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  section#contacto p {
+    margin: 0.5rem 0 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-light);
+  }
+
+  .mapa {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--text-dark);
+    color: white;
+    margin-top: 4rem;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px) {
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+    }
+
+    nav a {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    aside.carrito {
+      position: static;
+      width: 100%;
+      max-height: none;
+      border-left: none;
+      border-top: 4px solid var(--primary-color);
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+      border-radius: 12px;
+    }
+
+    .catalogo {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .integrantes ul {
+      grid-template-columns: 1fr;
+    }
+
+    main {
+      padding: 0 0.5rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media(max-width: 480px) {
+    nav {
+      flex-direction: column;
+    }
+
+    nav a {
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      border-radius: 0;
+    }
+
+    .catalogo {
+      grid-template-columns: 1fr;
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bienvenidos a Nuestra Tienda - Grupo 412</h1>
+</header>
+
+<nav>
+  <a href="#inicio" onclick="mostrarSeccion('inicio')" class="nav-link active">Inicio</a>
+  <a href="#catalogo" onclick="mostrarSeccion('catalogo')" class="nav-link">Catálogo</a>
+  <a href="#contacto" onclick="mostrarSeccion('contacto')" class="nav-link">Contacto</a>
+  <a href="#escatepec" onclick="mostrarSeccion('escatepec')" class="nav-link">Escatepec</a>
+</nav>
+
+<main>
+  <!-- Inicio -->
+  <section id="inicio" style="display:block;">
+    <div class="card integrantes">
+      <h2>Integrantes del Grupo 412</h2>
+      <ul>
+        <li>Hannah Charbel Morales Ramírez</li>
+        <li>Melani Naomi Díaz Fragoso</li>
+        <li>Giovany Aldair Cornelio Mandujano</li>
+        <li>Yolanda Melani Casasola Fonseca</li>
+        <li>Midori Natasha Hernández Laos</li>
+        <li>Aranda Ponce Luis Ernesto</li>
+      </ul>
+      <p>Bienvenidos a nuestra página web. Aquí encontrarás una gran variedad de productos con la mejor calidad y atención personalizada. Nuestro compromiso es ofrecerte la mejor experiencia de compra con productos de alta calidad y servicio excepcional.</p>
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <section id="catalogo" style="display:none;">
+    <div class="catalogo" id="catalogo-productos">
+      <!-- Productos generados por JS -->
+    </div>
+    <div class="pagination" id="pagination">
+      <!-- Paginación generada por JS -->
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" style="display:none;">
+    <div class="card">
+      <h2>Contacto</h2>
+      <p><strong>Dirección:</strong> CECyTEM Plantel Ecatepec - Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca, 55020 Ecatepec de Morelos, México</p>
+      <p><strong>Teléfono:</strong> +52 55 1234 5678</p>
+      <p><strong>Email:</strong> contacto@grupo412.com</p>
+      <p><strong>WhatsApp:</strong> <a href="https://wa.me/525515764800" target="_blank" style="color: var(--accent-color); font-weight: bold;">Enviar mensaje</a></p>
+
+      
+<div class="mapa">
+  
+
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3760.175774453522!2d-99.02816832418825!3d19.531890281765998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f0b10558839d%3A0x69d8ae8bcb16496!2sCECyTEM%20Plantel%20Ecatepec!5e0!3m2!1ses!2smx!4v1718472000000!5m2!1ses!2smx"
+  width="100%" height="400" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+
+</div>
+
+    </div>
+  </section>
+
+<!-- Formulario y enlace Escatepec -->
+<section id="escatepec" class="card" style="margin-top: 2rem;">
+  <h2>Formulario de Consulta</h2>
+  <form action="https://Localhost//paginas_php/nombre.php" method="post" target="_blank">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required style="padding: 0.5rem; width: 100%; margin-bottom: 1rem;"><br>
+
+    <label for="mensaje">Mensaje:</label><br>
+    <textarea id="mensaje" name="mensaje" rows="4" required style="padding: 0.5rem; width: 100%; margin-bottom: 1rem;"></textarea><br>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+  <p style="margin-top: 1.5rem;">
+    También puedes <a href="https://Localhost//paginas_php/nombre.php" target="_blank" style="color: var(--accent-color); font-weight: bold;">visitar la página de Escatepec</a> directamente.
+  </p>
+</section>
+
+</main>
+
+<!-- Carrito -->
+<aside class="carrito" style="display:none;"
+  <h2>🛒 Carrito de Compra</h2>
+  <ul class="lista-carrito" id="lista-carrito"></ul>
+  <div class="total-carrito">
+    <strong>Total: $<span id="total">0.00</span></strong>
+  </div>
+  <button id="finalizar" class="btn btn-accent" style="width: 100%;">Finalizar Venta</button>
+</aside>
+
+<footer>
+  &copy; 2025 Grupo 412 - Todos los derechos reservados
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  // Productos (100 productos con img, nombre y descripción)
+  
+
+  // Variables de paginación
+  const productos = [
+  { id: 1, nombre: `Sacapuntas doble #1`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `68.96`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 2, nombre: `Cinta adhesiva #2`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `50.79`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 3, nombre: `Cuaderno profesional #3`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `5.89`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 4, nombre: `Goma de borrar #4`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `14.44`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 5, nombre: `Colores de madera #5`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `11.54`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 6, nombre: `Clip sujetapapeles #6`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `41.85`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 7, nombre: `Bolígrafo azul #7`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `11.35`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 8, nombre: `Sacapuntas doble #8`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `40.68`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 9, nombre: `Engrapadora mediana #9`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `79.54`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 10, nombre: `Pluma estilográfica #10`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `23.58`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 11, nombre: `Cinta doble cara #11`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `65.80`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 12, nombre: `Notas adhesivas #12`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `61.68`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 13, nombre: `Hojas recicladas #13`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `75.84`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 14, nombre: `Resaltador fluorescente #14`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `41.66`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 15, nombre: `Juego de geometría #15`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `20.39`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 16, nombre: `Goma de borrar #16`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `46.54`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 17, nombre: `Block de hojas blancas #17`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `46.30`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 18, nombre: `Bolígrafo azul #18`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `51.88`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 19, nombre: `Etiquetas escolares #19`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `42.69`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 20, nombre: `Marcadores permanentes #20`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `51.33`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 21, nombre: `Resaltador fluorescente #21`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `60.43`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 22, nombre: `Etiquetas escolares #22`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `34.91`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 23, nombre: `Bolígrafo azul #23`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `33.79`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 24, nombre: `Estuche escolar #24`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `51.26`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 25, nombre: `Plumones para pizarrón #25`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `49.24`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 26, nombre: `Hojas recicladas #26`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `56.99`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 27, nombre: `Caja organizadora #27`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `63.26`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 28, nombre: `Marcadores permanentes #28`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `11.53`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 29, nombre: `Caja organizadora #29`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `60.94`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 30, nombre: `Bolígrafo azul #30`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `43.26`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 31, nombre: `Cuaderno profesional #31`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `44.03`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 32, nombre: `Carpeta tamaño carta #32`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `30.83`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 33, nombre: `Juego de geometría #33`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `79.70`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 34, nombre: `Goma de borrar #34`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `36.23`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 35, nombre: `Cinta adhesiva #35`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `46.36`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 36, nombre: `Hojas recicladas #36`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `47.60`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 37, nombre: `Resaltador fluorescente #37`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `36.99`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 38, nombre: `Tijeras escolares #38`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `77.72`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 39, nombre: `Carpeta tamaño carta #39`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `68.56`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 40, nombre: `Hojas recicladas #40`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `6.77`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 41, nombre: `Juego de geometría #41`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `55.44`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 42, nombre: `Corrector líquido #42`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `72.03`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 43, nombre: `Notas adhesivas #43`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `6.84`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 44, nombre: `Plumones para pizarrón #44`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `77.97`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 45, nombre: `Hojas recicladas #45`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `67.25`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 46, nombre: `Resaltador fluorescente #46`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `63.30`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 47, nombre: `Pegamento en barra #47`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `72.42`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 48, nombre: `Marcadores permanentes #48`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `26.32`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 49, nombre: `Pegamento en barra #49`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `53.86`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 50, nombre: `Resaltador fluorescente #50`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `8.72`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 51, nombre: `Pegamento en barra #51`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `70.84`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 52, nombre: `Lápiz HB #52`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `66.86`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 53, nombre: `Marcadores de pizarra #53`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `23.61`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 54, nombre: `Goma de borrar #54`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `52.02`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 55, nombre: `Block de hojas blancas #55`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `31.59`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 56, nombre: `Marcadores de pizarra #56`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `64.22`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 57, nombre: `Cuaderno profesional #57`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `75.28`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 58, nombre: `Corrector líquido #58`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `31.76`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 59, nombre: `Marcadores de pizarra #59`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `24.32`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 60, nombre: `Tijeras escolares #60`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `69.50`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 61, nombre: `Cuaderno profesional #61`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `74.37`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 62, nombre: `Compás metálico #62`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `61.60`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 63, nombre: `Cuaderno profesional #63`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `39.70`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 64, nombre: `Cinta doble cara #64`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `54.36`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 65, nombre: `Marcadores de pizarra #65`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `20.91`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 66, nombre: `Pluma estilográfica #66`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `11.92`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 67, nombre: `Hojas recicladas #67`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `39.42`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 68, nombre: `Clip sujetapapeles #68`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `77.44`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 69, nombre: `Plumones para pizarrón #69`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `42.56`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 70, nombre: `Cinta adhesiva #70`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `68.49`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 71, nombre: `Pegamento en barra #71`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `72.41`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 72, nombre: `Plumones para pizarrón #72`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `30.78`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 73, nombre: `Marcadores permanentes #73`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `65.01`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 74, nombre: `Lápiz HB #74`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `5.06`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 75, nombre: `Bolígrafo azul #75`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `41.74`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 76, nombre: `Engrapadora mediana #76`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `27.15`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 77, nombre: `Pegamento en barra #77`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `18.68`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 78, nombre: `Pegamento en barra #78`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `51.29`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 79, nombre: `Bolígrafo azul #79`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `25.02`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 80, nombre: `Corrector líquido #80`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `11.11`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 81, nombre: `Colores de madera #81`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `53.40`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 82, nombre: `Plumones para pizarrón #82`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `36.00`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 83, nombre: `Bolígrafo azul #83`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `17.24`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 84, nombre: `Compás metálico #84`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `6.28`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 85, nombre: `Clip sujetapapeles #85`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `79.26`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 86, nombre: `Cartulina blanca #86`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `45.67`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 87, nombre: `Plumones para pizarrón #87`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `61.02`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 88, nombre: `Marcadores de pizarra #88`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `11.01`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 89, nombre: `Plumones para pizarrón #89`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `14.64`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 90, nombre: `Sacapuntas doble #90`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `18.71`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+  { id: 91, nombre: `Hojas recicladas #91`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `12.08`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
+  { id: 92, nombre: `Carpeta tamaño carta #92`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `27.69`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
+  { id: 93, nombre: `Cuaderno profesional #93`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `29.67`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
+  { id: 94, nombre: `Pluma estilográfica #94`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `6.31`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
+  { id: 95, nombre: `Resaltador fluorescente #95`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `39.67`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
+  { id: 96, nombre: `Pluma estilográfica #96`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `66.76`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
+  { id: 97, nombre: `Cuaderno profesional #97`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `57.41`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
+  { id: 98, nombre: `Juego de geometría #98`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `6.96`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
+  { id: 99, nombre: `Libreta cuadriculada #99`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `46.57`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
+  { id: 100, nombre: `Tijeras escolares #100`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `37.24`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
+];
+
+const productsPorPagina = 12;
+  let paginaActual = 1;
+  const totalPaginas = Math.ceil(productos.length / productsPorPagina);
+
+  // Mostrar productos con paginación
+  function mostrarProductos(pagina = 1) {
+    const catalogoDiv = document.getElementById('catalogo-productos');
+    catalogoDiv.innerHTML = '';
+    
+    const inicio = (pagina - 1) * productsPorPagina;
+    const fin = inicio + productsPorPagina;
+    const productosAPagina = productos.slice(inicio, fin);
+    
+    productosAPagina.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'producto';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.nombre}" />
+        <div class="producto-content">
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <div class="precio">$${p.precio}</div>
+          <button onclick="toggleFavorito(${p.id})" class="btn btn-secondary" style="margin-bottom: 0.5rem;">❤️</button>
+          <button onclick="agregarCarrito(${p.id})" class="btn btn-primary">Agregar al carrito</button>
+        </div>
+      `;
+      catalogoDiv.appendChild(div);
+    });
+    
+    mostrarPaginacion();
+  }
+
+  // Mostrar paginación
+  function mostrarPaginacion() {
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = '';
+    
+    // Botón anterior
+    const btnAnterior = document.createElement('button');
+    btnAnterior.textContent = '← Anterior';
+    btnAnterior.disabled = paginaActual === 1;
+    btnAnterior.onclick = () => cambiarPagina(paginaActual - 1);
+    paginationDiv.appendChild(btnAnterior);
+    
+    // Botones de números de página
+    for(let i = 1; i <= totalPaginas; i++) {
+      if(i === 1 || i === totalPaginas || (i >= paginaActual - 2 && i <= paginaActual + 2)) {
+        const btnPagina = document.createElement('button');
+        btnPagina.textContent = i;
+        btnPagina.className = i === paginaActual ? 'active' : '';
+        btnPagina.onclick = () => cambiarPagina(i);
+        paginationDiv.appendChild(btnPagina);
+      } else if(i === paginaActual - 3 || i === paginaActual + 3) {
+        const span = document.createElement('span');
+        span.textContent = '...';
+        span.style.padding = '0.5rem';
+        paginationDiv.appendChild(span);
+      }
+    }
+    
+    // Botón siguiente
+    const btnSiguiente = document.createElement('button');
+    btnSiguiente.textContent = 'Siguiente →';
+    btnSiguiente.disabled = paginaActual === totalPaginas;
+    btnSiguiente.onclick = () => cambiarPagina(paginaActual + 1);
+    paginationDiv.appendChild(btnSiguiente);
+  }
+
+  // Cambiar página
+  function cambiarPagina(nuevaPagina) {
+    if(nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
+      paginaActual = nuevaPagina;
+      mostrarProductos(paginaActual);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // Manejo de secciones
+  function mostrarSeccion(seccion) {
+    // Ocultar todas las secciones
+    document.querySelectorAll('main > section').forEach(sec => {
+      sec.style.display = 'none';
+    });
+    
+    // Mostrar la sección seleccionada
+    document.getElementById(seccion).style.display = 'block';
+    
+    // Actualizar navegación activa
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    document.querySelector(`[onclick="mostrarSeccion('${seccion}')"]`).classList.add('active');
+    
+    // Si es catálogo, mostrar productos
+    if(seccion === 'catalogo') {
+      mostrarProductos(1);
+      paginaActual = 1;
+    }
+  }
+
+  // Carrito
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+  function actualizarCarrito() {
+    const lista = document.getElementById('lista-carrito');
+    lista.innerHTML = '';
+    let total = 0;
+    
+    if(carrito.length === 0) {
+      lista.innerHTML = '<li style="text-align: center; color: #6b7280; padding: 2rem;">El carrito está vacío</li>';
+    } else {
+      carrito.forEach(item => {
+        const p = productos.find(prod => prod.id === item.id);
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre}">
+          <div class="info">
+            <p><strong>${p.nombre}</strong></p>
+            <p>Cantidad: ${item.cantidad}</p>
+          </div>
+          <div class="precio">$${(p.precio * item.cantidad).toFixed(2)}</div>
+          <button class="borrar" onclick="quitarDelCarrito(${p.id})" title="Eliminar">×</button>
+        `;
+        lista.appendChild(li);
+        total += p.precio * item.cantidad;
+      });
+    }
+    
+    document.getElementById('total').textContent = total.toFixed(2);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }
+
+  function agregarCarrito(id) {
+    const index = carrito.findIndex(item => item.id === id);
+    if(index > -1) {
+      carrito[index].cantidad++;
+    } else {
+      carrito.push({id, cantidad: 1});
+    }
+    actualizarCarrito();
+    
+    // Mostrar notificación
+    const producto = productos.find(p => p.id === id);
+    mostrarNotificacion(`${producto.nombre} agregado al carrito`);
+  }
+
+  function quitarDelCarrito(id) {
+    const producto = productos.find(p => p.id === id);
+    carrito = carrito.filter(item => item.id !== id);
+    actualizarCarrito();
+    mostrarNotificacion(`${producto.nombre} eliminado del carrito`);
+  }
+
+  function mostrarNotificacion(mensaje) {
+    const notif = document.createElement('div');
+    notif.style.cssText = `
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: var(--accent-color);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      animation: slideIn 0.3s ease;
+    `;
+    notif.textContent = mensaje;
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+      notif.remove();
+    }, 3000);
+  }
+
+  
+  let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+  function toggleFavorito(id) {
+    const index = favoritos.indexOf(id);
+    if (index === -1) {
+      favoritos.push(id);
+      mostrarNotificacion('Agregado a favoritos ❤️');
+    } else {
+      favoritos.splice(index, 1);
+      mostrarNotificacion('Eliminado de favoritos 💔');
+    }
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  }
+
+  // Comentarios simples por producto
+  const comentarios = {};
+
+  function agregarComentario(id, texto) {
+    if (!comentarios[id]) comentarios[id] = [];
+    comentarios[id].push(texto);
+    mostrarNotificacion('Comentario agregado');
+    mostrarComentarios(id);
+  }
+
+  function mostrarComentarios(id) {
+    const contenedor = document.getElementById(`comentarios-${id}`);
+    if (!contenedor || !comentarios[id]) return;
+    contenedor.innerHTML = comentarios[id].map(c => `<p style="font-size: 0.8rem; color: #4b5563; margin: 0.3rem 0;">🗨️ ${c}</p>`).join('');
+  }
+
+
+  // Finalizar venta y generar PDF
+  document.getElementById('finalizar').addEventListener('click', () => {
+    if(carrito.length === 0) {
+      alert('El carrito está vacío.');
+      return;
+    }
+    generarPDF();
+  });
+
+  async function generarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Encabezado
+    doc.setFillColor(37, 99, 235);
+    doc.rect(0, 0, 210, 40, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.text('TICKET DE COMPRA', 105, 20, null, null, 'center');
+    doc.setFontSize(14);
+    doc.text('Grupo 412 - Mi Tienda', 105, 30, null, null, 'center');
+
+    // Info comercio
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10);
+    doc.text('CECyTEM Plantel Ecatepec', 20, 50);
+    doc.text('Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca', 20, 55);
+    doc.text('55020 Ecatepec de Morelos, México', 20, 60);
+
+    // Fecha y hora
+    const fechaHora = new Date().toLocaleString('es-MX');
+    doc.text(`Fecha: ${fechaHora}`, 140, 50);
+
+    doc.setDrawColor(37, 99, 235);
+    doc.line(20, 70, 190, 70);
+
+    let y = 85;
+    let total = 0;
+
+    // Tabla de productos
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'bold');
+    doc.text('Producto', 20, y);
+    doc.text('Cant.', 120, y);
+    doc.text('Precio', 140, y);
+    doc.text('Subtotal', 170, y);
+    y += 10;
+    doc.line(20, y - 2, 190, y - 2);
+    doc.setFont(undefined, 'normal');
+
+    carrito.forEach(item => {
+      const p = productos.find(prod => prod.id === item.id);
+      const subtotal = parseFloat(p.precio) * item.cantidad;
+
+      doc.text(p.nombre.substring(0, 25), 20, y);
+      doc.text(item.cantidad.toString(), 125, y);
+      doc.text(`$${p.precio}`, 145, y);
+      doc.text(`$${subtotal.toFixed(2)}`, 175, y);
+      y += 8;
+      total += subtotal;
+    });
+
+    doc.line(20, y + 5, 190, y + 5);
+    y += 15;
+    doc.setFontSize(14);
+    doc.setFont(undefined, 'bold');
+    doc.text(`Subtotal: $${total.toFixed(2)}`, 140, y);
+
+    // IVA y total con IVA
+    const iva = total * 0.16;
+    const totalConIVA = total + iva;
+    y += 10;
+    doc.text(`IVA (16%): $${iva.toFixed(2)}`, 140, y);
+    y += 10;
+    doc.text(`TOTAL CON IVA: $${totalConIVA.toFixed(2)}`, 140, y);
+
+    // Método de pago
+    y += 20;
+    doc.setFont(undefined, 'normal');
+    doc.setFontSize(11);
+    doc.text('Método de pago: Tarjeta de débito', 20, y);
+
+    // Número de transacción
+    const transaccion = Math.floor(100000 + Math.random() * 900000);
+    y += 8;
+    doc.text(`No. Transacción: ${transaccion}`, 20, y);
+
+    // WhatsApp
+    y += 10;
+    doc.text('Contáctanos: +52 55 1234 5678', 20, y);
+    y += 7;
+    doc.textWithLink('Enviar mensaje por WhatsApp', 20, y, { url: 'https://wa.me/525512345678' });
+
+    // Agradecimiento
+    y += 20;
+    doc.setFontSize(12);
+    doc.text('¡Gracias por su compra!', 105, y, null, null, 'center');
+    doc.text('Grupo 412 - CECyTEM Plantel Ecatepec', 105, y + 10, null, null, 'center');
+
+    doc.save('ticket_compra.pdf');
+
+    carrito = [];
+    actualizarCarrito();
+    mostrarNotificacion('¡Compra realizada exitosamente!');
+  }
+
+  // Inicializar
+  document.addEventListener('DOMContentLoaded', () => {
+    actualizarCarrito();
+    mostrarProductos(1);
+  });
+
+  
+  // Mostrar/ocultar carrito
+  function toggleCarrito() {
+    const carrito = document.querySelector('aside.carrito');
+    carrito.style.display = (carrito.style.display === 'none' || carrito.style.display === '') ? 'block' : 'none';
+  }
+
+
+  
+  function toggleModo() {
+    const root = document.documentElement;
+    const modoActual = root.getAttribute('data-tema') || 'claro';
+    const nuevoModo = modoActual === 'claro' ? 'oscuro' : 'claro';
+    root.setAttribute('data-tema', nuevoModo);
+    localStorage.setItem('tema', nuevoModo);
+    aplicarTema(nuevoModo);
+  }
+
+  function aplicarTema(modo) {
+    const root = document.documentElement;
+    if (modo === 'oscuro') {
+      root.style.setProperty('--background', '#1f2937');
+      root.style.setProperty('--card-bg', '#374151');
+      root.style.setProperty('--text-dark', '#f9fafb');
+      root.style.setProperty('--text-light', '#d1d5db');
+    } else {
+      root.style.setProperty('--background', '#f8fafc');
+      root.style.setProperty('--card-bg', '#ffffff');
+      root.style.setProperty('--text-dark', '#1f2937');
+      root.style.setProperty('--text-light', '#6b7280');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const modoGuardado = localStorage.getItem('tema') || 'claro';
+    document.documentElement.setAttribute('data-tema', modoGuardado);
+    aplicarTema(modoGuardado);
+  });
+
+
+  // Añadir animaciones CSS dinámicamente
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  `;
+  document.head.appendChild(style);
+
+</script>
+
+
+<!-- Botón flotante para mostrar/ocultar carrito -->
+<button onclick="toggleCarrito()" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 1100;
+" title="Mostrar/Ocultar carrito">🛒</button>
+
+
+<!-- Botón modo oscuro/claro -->
+<button onclick="toggleModo()" style="
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: var(--text-dark);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 1100;
+" title="Cambiar modo">🌗</button>
+
+</body>
+</html>
