@@ -1,1076 +1,1327 @@
 
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mi Tienda - Grupo 412</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Mi Tienda Equipo alfa buena maravilla onda dinamita escuadrón lobo - Grupo 412</title>
 <style>
-  :root {
-    --primary-color: #2563eb;
-    --secondary-color: #dc2626;
-    --accent-color: #059669;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --background: #f8fafc;
-    --card-bg: #ffffff;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0; 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: var(--background);
-    color: var(--text-dark);
-    line-height: 1.6;
-  }
-
-  header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    padding: 2rem 1rem;
-    text-align: center;
-    color: white;
-    box-shadow: var(--shadow-lg);
-  }
-
-  header h1 {
-    font-size: 2.5rem;
-    margin: 0;
-    font-weight: 700;
-    animation: titulo-animado 2s ease forwards;
-    opacity: 0;
-  }
-
-  @keyframes titulo-animado {
-    0% { opacity: 0; transform: translateY(-20px);}
-    100% { opacity: 1; transform: translateY(0);}
-  }
-
-  nav {
-    background: var(--card-bg);
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    padding: 0;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  nav a {
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 1rem 2rem;
-    transition: all 0.3s ease;
-    border-bottom: 3px solid transparent;
-  }
-
-  nav a:hover, nav a.active {
-    background: var(--primary-color);
-    color: white;
-    border-bottom-color: var(--secondary-color);
-  }
-
-  main {
-    max-width: 1400px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-  }
-
-  .card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-  }
-
-  .integrantes h2 {
-    color: var(--primary-color);
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-
-  .integrantes ul {
-    list-style: none;
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 0.5rem;
-  }
-
-  .integrantes li {
-    margin: 0.5rem 0;
-    padding: 0.5rem 1rem;
-    background: var(--background);
-    border-radius: 8px;
-    border-left: 4px solid var(--accent-color);
-  }
-
-  .integrantes p {
-    font-size: 1.1rem;
-    color: var(--text-light);
-    margin-top: 1.5rem;
-  }
-
-  .catalogo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .producto {
-    background: var(--card-bg);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .producto:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-5px);
-  }
-
-  .producto img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .producto-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .producto h3 {
-    margin: 0 0 0.5rem;
-    color: var(--text-dark);
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-
-  .producto p {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 1rem;
-  }
-
-  .producto .precio {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-  }
-
-  .btn {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .btn-primary {
-    background: var(--primary-color);
-    color: white;
-  }
-
-  .btn-primary:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .btn-secondary {
-    background: var(--secondary-color);
-    color: white;
-  }
-
-  .btn-secondary:hover {
-    background: #b91c1c;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .btn-accent {
-    background: var(--accent-color);
-    color: white;
-  }
-
-  .btn-accent:hover {
-    background: #047857;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Paginación */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 2rem 0;
-  }
-
-  .pagination button {
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--primary-color);
-    background: transparent;
-    color: var(--primary-color);
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .pagination button:hover, .pagination button.active {
-    background: var(--primary-color);
-    color: white;
-  }
-
-  .pagination button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  /* Carrito */
-  aside.carrito {
-    position: fixed;
-    top: 80px;
-    right: 0;
-    width: 380px;
-    max-height: 80vh;
-    background: var(--card-bg);
-    border-left: 4px solid var(--primary-color);
-    box-shadow: var(--shadow-lg);
-    padding: 1.5rem;
-    overflow-y: auto;
-    z-index: 1000;
-    border-radius: 12px 0 0 12px;
-  }
-
-  aside.carrito h2 {
-    margin-top: 0;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  ul.lista-carrito {
-    list-style: none;
-    padding-left: 0;
-    max-height: 50vh;
-    overflow-y: auto;
-    margin-bottom: 1.5rem;
-  }
-
-  ul.lista-carrito li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background: var(--background);
-    border-radius: 8px;
-    transition: background 0.3s ease;
-  }
-
-  ul.lista-carrito li:hover {
-    background: #e2e8f0;
-  }
-
-  ul.lista-carrito img {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    object-fit: cover;
-    margin-right: 1rem;
-  }
-
-  ul.lista-carrito .info {
-    flex-grow: 1;
-  }
-
-  ul.lista-carrito .info p {
-    margin: 0;
-    font-size: 0.9rem;
-  }
-
-  ul.lista-carrito .precio {
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin-left: 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  ul.lista-carrito button.borrar {
-    background: var(--secondary-color);
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-
-  ul.lista-carrito button.borrar:hover {
-    background: #b91c1c;
-    transform: scale(1.1);
-  }
-
-  .total-carrito {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    text-align: center;
-    padding: 1rem;
-    background: var(--background);
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
-
-  /* Sección contacto */
-  section#contacto h2 {
-    color: var(--primary-color);
-    font-size: 1.75rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-
-  section#contacto p {
-    margin: 0.5rem 0 1.5rem;
-    font-size: 1.1rem;
-    color: var(--text-light);
-  }
-
-  .mapa {
-    width: 100%;
-    height: 400px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background: var(--text-dark);
-    color: white;
-    margin-top: 4rem;
-    font-weight: 500;
-  }
-
-  /* Responsive */
-  @media(max-width: 768px) {
-    header h1 {
-      font-size: 2rem;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8fafc;
+      color: #1f2937;
     }
-
+    header {
+      background: linear-gradient(135deg, #2563eb, #dc2626);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
     nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
+      z-index: 999;
     }
-
     nav a {
-      padding: 0.75rem 1rem;
-      font-size: 0.9rem;
+      text-decoration: none;
+      color: #1f2937;
+      font-weight: bold;
+      transition: 0.3s;
     }
-
-    aside.carrito {
-      position: static;
-      width: 100%;
-      max-height: none;
-      border-left: none;
-      border-top: 4px solid var(--primary-color);
-      box-shadow: var(--shadow);
-      margin-top: 2rem;
-      border-radius: 12px;
+    nav a:hover, nav a.active {
+      color: #2563eb;
+      border-bottom: 2px solid #dc2626;
     }
-
-    .catalogo {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-
-    .integrantes ul {
-      grid-template-columns: 1fr;
-    }
-
     main {
-      padding: 0 0.5rem;
+      max-width: 1400px;
+      margin: auto;
+      padding: 1rem;
     }
-
     .card {
-      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-  }
-
-  @media(max-width: 480px) {
-    nav {
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .producto {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
       flex-direction: column;
     }
-
-    nav a {
+    .producto img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .producto-content {
+      padding: 1rem;
       text-align: center;
-      border-bottom: 1px solid #e5e7eb;
-      border-radius: 0;
+      flex-grow: 1;
     }
-
-    .catalogo {
-      grid-template-columns: 1fr;
+    .producto h3 {
+      margin: 0.5rem 0;
     }
-
-    .pagination {
-      flex-wrap: wrap;
+    .producto .precio {
+      font-size: 1.2rem;
+      color: #dc2626;
+      font-weight: bold;
+      margin: 0.5rem 0;
     }
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+    .btn-secondary {
+      background: #dc2626;
+      color: white;
+    }
+  </style>
+<style>
+  .modo-oscuro body {
+    background-color: #1f2937;
+    color: #f8fafc;
+  }
+  .modo-oscuro .card, .modo-oscuro .producto, .modo-oscuro nav {
+    background-color: #111827;
+    color: #f8fafc;
+  }
+  .modo-oscuro .btn-primary {
+    background: #4f46e5;
+  }
+  .modo-oscuro .btn-secondary {
+    background: #f43f5e;
+  }
+  .floating-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: #2563eb;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 9999;
   }
 </style>
 </head>
 <body>
-
 <header>
-  <h1>Bienvenidos a Nuestra Tienda - Grupo 412</h1>
+<h1>Bienvenidos a Nuestra Tienda Equipo alfa buena maravilla onda dinamita escuadrón lobo - Grupo 412</h1>
 </header>
-
 <nav>
-  <a href="#inicio" onclick="mostrarSeccion('inicio')" class="nav-link active">Inicio</a>
-  <a href="#catalogo" onclick="mostrarSeccion('catalogo')" class="nav-link">Catálogo</a>
-  <a href="#contacto" onclick="mostrarSeccion('contacto')" class="nav-link">Contacto</a>
-  <a href="#escatepec" onclick="mostrarSeccion('escatepec')" class="nav-link">Escatepec</a>
+<a class="nav-link active" href="#inicio" onclick="mostrarSeccion('inicio')">Inicio</a>
+<a class="nav-link" href="#catalogo" onclick="mostrarSeccion('catalogo')">Catálogo</a>
+<a class="nav-link" href="#contacto" onclick="mostrarSeccion('contacto')">Contacto</a>
 </nav>
-
 <main>
-  <!-- Inicio -->
-  <section id="inicio" style="display:block;">
-    <div class="card integrantes">
-      <h2>Integrantes del Grupo 412</h2>
-      <ul>
-        <li>Hannah Charbel Morales Ramírez</li>
-        <li>Melani Naomi Díaz Fragoso</li>
-        <li>Giovany Aldair Cornelio Mandujano</li>
-        <li>Yolanda Melani Casasola Fonseca</li>
-        <li>Midori Natasha Hernández Laos</li>
-        <li>Aranda Ponce Luis Ernesto</li>
-      </ul>
-      <p>Bienvenidos a nuestra página web. Aquí encontrarás una gran variedad de productos con la mejor calidad y atención personalizada. Nuestro compromiso es ofrecerte la mejor experiencia de compra con productos de alta calidad y servicio excepcional.</p>
-    </div>
-  </section>
-
-  <!-- Catálogo -->
-  <section id="catalogo" style="display:none;">
-    <div class="catalogo" id="catalogo-productos">
-      <!-- Productos generados por JS -->
-    </div>
-    <div class="pagination" id="pagination">
-      <!-- Paginación generada por JS -->
-    </div>
-  </section>
-
-  <!-- Contacto -->
-  <section id="contacto" style="display:none;">
-    <div class="card">
-      <h2>Contacto</h2>
-      <p><strong>Dirección:</strong> CECyTEM Plantel Ecatepec - Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca, 55020 Ecatepec de Morelos, México</p>
-      <p><strong>Teléfono:</strong> +52 55 1234 5678</p>
-      <p><strong>Email:</strong> contacto@grupo412.com</p>
-      <p><strong>WhatsApp:</strong> <a href="https://wa.me/525515764800" target="_blank" style="color: var(--accent-color); font-weight: bold;">Enviar mensaje</a></p>
-
-      
-<div class="mapa">
-  
-
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3760.175774453522!2d-99.02816832418825!3d19.531890281765998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f0b10558839d%3A0x69d8ae8bcb16496!2sCECyTEM%20Plantel%20Ecatepec!5e0!3m2!1ses!2smx!4v1718472000000!5m2!1ses!2smx"
-  width="100%" height="400" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-
-
+<section id="inicio" style="display:block;">
+<div class="card">
+<h2>Integrantes del Grupo 412</h2>
+<ul>
+<li>Hannah Charbel Morales Ramírez</li>
+<li>Melani Naomi Díaz Fragoso</li>
+<li>Giovany Aldair Cornelio Mandujano</li>
+<li>Yolanda Melani Casasola Fonseca</li>
+<li>Midori Natasha Hernández Laos</li>
+<li>Aranda Ponce Luis Ernesto</li>
+</ul>
+<p>Bienvenidos a nuestra página web. Equipo alfa buena maravilla onda dinamita escuadrón lobo Aquí encontrarás una gran variedad de productos con la mejor calidad y atención personalizada. Nuestro compromiso es ofrecerte la mejor experiencia de compra con productos de alta calidad y servicio excepcional.</p>
 </div>
-
-    </div>
-  </section>
-
-<!-- Formulario y enlace Escatepec -->
-<section id="escatepec" class="card" style="margin-top: 2rem;">
-  <h2>Formulario de Consulta</h2>
-  <form action="https://Localhost//paginas_php/nombre.php" method="post" target="_blank">
-    <label for="nombre">Nombre:</label><br>
-    <input type="text" id="nombre" name="nombre" required style="padding: 0.5rem; width: 100%; margin-bottom: 1rem;"><br>
-
-    <label for="mensaje">Mensaje:</label><br>
-    <textarea id="mensaje" name="mensaje" rows="4" required style="padding: 0.5rem; width: 100%; margin-bottom: 1rem;"></textarea><br>
-
-    <button type="submit" class="btn btn-primary">Enviar</button>
-  </form>
-  <p style="margin-top: 1.5rem;">
-    También puedes <a href="https://Localhost//paginas_php/nombre.php" target="_blank" style="color: var(--accent-color); font-weight: bold;">visitar la página de Escatepec</a> directamente.
-  </p>
 </section>
-
+<section id="catalogo" style="display:none;">
+<div class="catalogo">
+<div class="producto">
+<img alt="Bolígrafo azul" src="file:///E:/Documentos/Equipo%20alfa%20buena%20maravilla%20onda%20dinamita%20escuadr%C3%B3n%20lobo%20HTML/plumaazul.jpg"/>
+<div class="producto-content">
+<h3>Bolígrafo azul</h3>
+<p>Bolígrafo azul de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$10.87</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(1)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(1)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Bolígrafo negro" src="file:///E:/Documentos/Equipo%20alfa%20buena%20maravilla%20onda%20dinamita%20escuadr%C3%B3n%20lobo%20HTML/plumanegra.jpg"/>
+<div class="producto-content">
+<h3>Bolígrafo negro</h3>
+<p>Bolígrafo negro de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$11.74</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(2)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(2)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Bolígrafo rojo" src="file:///E:/Documentos/Equipo%20alfa%20buena%20maravilla%20onda%20dinamita%20escuadr%C3%B3n%20lobo%20HTML/roja.jpg"/>
+<div class="producto-content">
+<h3>Bolígrafo rojo</h3>
+<p>Bolígrafo rojo de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$12.61</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(3)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(3)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Lápiz #2" src="file:///E:/Documentos/Equipo%20alfa%20buena%20maravilla%20onda%20dinamita%20escuadr%C3%B3n%20lobo%20HTML/lapiz.jpg"/>
+<div class="producto-content">
+<h3>Lápiz #2</h3>
+<p>Lápiz #2 de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$13.48</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(4)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(4)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Lápiz de dibujo HB" src="file:///E:/Documentos/Equipo%20alfa%20buena%20maravilla%20onda%20dinamita%20escuadr%C3%B3n%20lobo%20HTML/lapizdibujo.jpg"/>
+<div class="producto-content">
+<h3>Lápiz de dibujo HB</h3>
+<p>Lápiz de dibujo HB de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$14.35</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(5)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(5)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Portaminas 0.5 mm" src="file:///E:/Documentos/Equipo%20alfa%20buena%20maravilla%20onda%20dinamita%20escuadr%C3%B3n%20lobo%20HTML/Portaminas%200.5%20mm.jpg"/>
+<div class="producto-content">
+<h3>Portaminas 0.5 mm</h3>
+<p>Portaminas 0.5 mm de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$15.22</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(6)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(6)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Portaminas 0.7 mm" src="https://http2.mlstatic.com/D_NQ_NP_601467-MLM50914642303_072022-O.webp"/>
+<div class="producto-content">
+<h3>Portaminas 0.7 mm</h3>
+<p>Portaminas 0.7 mm de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$16.09</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(7)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(7)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Marcador permanente negro" src="img/producto8.jpg"/>
+<div class="producto-content">
+<h3>Marcador permanente negro</h3>
+<p>Marcador permanente negro de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$16.96</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(8)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(8)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Marcador permanente rojo" src="img/producto9.jpg"/>
+<div class="producto-content">
+<h3>Marcador permanente rojo</h3>
+<p>Marcador permanente rojo de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$17.83</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(9)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(9)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Marcador para pizarrón blanco" src="img/producto10.jpg"/>
+<div class="producto-content">
+<h3>Marcador para pizarrón blanco</h3>
+<p>Marcador para pizarrón blanco de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$18.7</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(10)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(10)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Regla 30 cm" src="img/producto11.jpg"/>
+<div class="producto-content">
+<h3>Regla 30 cm</h3>
+<p>Regla 30 cm de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$19.57</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(11)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(11)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Regla flexible" src="img/producto12.jpg"/>
+<div class="producto-content">
+<h3>Regla flexible</h3>
+<p>Regla flexible de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$20.44</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(12)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(12)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Escuadra 45°" src="img/producto13.jpg"/>
+<div class="producto-content">
+<h3>Escuadra 45°</h3>
+<p>Escuadra 45° de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$21.31</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(13)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(13)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Escuadra 60°" src="img/producto14.jpg"/>
+<div class="producto-content">
+<h3>Escuadra 60°</h3>
+<p>Escuadra 60° de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$22.18</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(14)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(14)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Transportador" src="img/producto15.jpg"/>
+<div class="producto-content">
+<h3>Transportador</h3>
+<p>Transportador de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$23.05</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(15)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(15)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Compás metálico" src="img/producto16.jpg"/>
+<div class="producto-content">
+<h3>Compás metálico</h3>
+<p>Compás metálico de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$23.92</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(16)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(16)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Juego de geometría completo" src="img/producto17.jpg"/>
+<div class="producto-content">
+<h3>Juego de geometría completo</h3>
+<p>Juego de geometría completo de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$24.79</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(17)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(17)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cinta métrica escolar" src="img/producto18.jpg"/>
+<div class="producto-content">
+<h3>Cinta métrica escolar</h3>
+<p>Cinta métrica escolar de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$25.66</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(18)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(18)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Curvígrafo" src="img/producto19.jpg"/>
+<div class="producto-content">
+<h3>Curvígrafo</h3>
+<p>Curvígrafo de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$26.53</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(19)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(19)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Plantilla de figuras geométricas" src="img/producto20.jpg"/>
+<div class="producto-content">
+<h3>Plantilla de figuras geométricas</h3>
+<p>Plantilla de figuras geométricas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$27.4</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(20)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(20)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cuaderno profesional rayado" src="img/producto21.jpg"/>
+<div class="producto-content">
+<h3>Cuaderno profesional rayado</h3>
+<p>Cuaderno profesional rayado de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$28.27</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(21)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(21)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cuaderno profesional cuadro grande" src="img/producto22.jpg"/>
+<div class="producto-content">
+<h3>Cuaderno profesional cuadro grande</h3>
+<p>Cuaderno profesional cuadro grande de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$29.14</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(22)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(22)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cuaderno de dibujo" src="img/producto23.jpg"/>
+<div class="producto-content">
+<h3>Cuaderno de dibujo</h3>
+<p>Cuaderno de dibujo de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$30.01</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(23)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(23)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Hojas blancas tamaño carta (resma)" src="img/producto24.jpg"/>
+<div class="producto-content">
+<h3>Hojas blancas tamaño carta (resma)</h3>
+<p>Hojas blancas tamaño carta (resma) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$30.88</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(24)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(24)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Hojas recicladas" src="img/producto25.jpg"/>
+<div class="producto-content">
+<h3>Hojas recicladas</h3>
+<p>Hojas recicladas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$31.75</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(25)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(25)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Hojas de color (paquete)" src="img/producto26.jpg"/>
+<div class="producto-content">
+<h3>Hojas de color (paquete)</h3>
+<p>Hojas de color (paquete) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$32.62</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(26)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(26)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Libreta de notas pequeña" src="img/producto27.jpg"/>
+<div class="producto-content">
+<h3>Libreta de notas pequeña</h3>
+<p>Libreta de notas pequeña de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$33.49</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(27)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(27)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Carpeta de 3 anillas" src="img/producto28.jpg"/>
+<div class="producto-content">
+<h3>Carpeta de 3 anillas</h3>
+<p>Carpeta de 3 anillas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$34.36</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(28)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(28)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Carpeta tipo acordeón" src="img/producto29.jpg"/>
+<div class="producto-content">
+<h3>Carpeta tipo acordeón</h3>
+<p>Carpeta tipo acordeón de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$35.23</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(29)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(29)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Separadores de carpeta" src="img/producto30.jpg"/>
+<div class="producto-content">
+<h3>Separadores de carpeta</h3>
+<p>Separadores de carpeta de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$36.1</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(30)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(30)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Caja de colores (12 piezas)" src="img/producto31.jpg"/>
+<div class="producto-content">
+<h3>Caja de colores (12 piezas)</h3>
+<p>Caja de colores (12 piezas) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$36.97</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(31)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(31)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Caja de crayones" src="img/producto32.jpg"/>
+<div class="producto-content">
+<h3>Caja de crayones</h3>
+<p>Caja de crayones de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$37.84</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(32)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(32)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Marcadores de colores (12 piezas)" src="img/producto33.jpg"/>
+<div class="producto-content">
+<h3>Marcadores de colores (12 piezas)</h3>
+<p>Marcadores de colores (12 piezas) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$38.71</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(33)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(33)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Pintura acrílica (set básico)" src="img/producto34.jpg"/>
+<div class="producto-content">
+<h3>Pintura acrílica (set básico)</h3>
+<p>Pintura acrílica (set básico) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$39.58</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(34)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(34)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Pinceles (juego de 5)" src="img/producto35.jpg"/>
+<div class="producto-content">
+<h3>Pinceles (juego de 5)</h3>
+<p>Pinceles (juego de 5) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$40.45</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(35)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(35)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Plastilina (varios colores)" src="img/producto36.jpg"/>
+<div class="producto-content">
+<h3>Plastilina (varios colores)</h3>
+<p>Plastilina (varios colores) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$41.32</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(36)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(36)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Papel crepé" src="img/producto37.jpg"/>
+<div class="producto-content">
+<h3>Papel crepé</h3>
+<p>Papel crepé de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$42.19</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(37)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(37)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Papel lustre" src="img/producto38.jpg"/>
+<div class="producto-content">
+<h3>Papel lustre</h3>
+<p>Papel lustre de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$43.06</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(38)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(38)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Papel celofán" src="img/producto39.jpg"/>
+<div class="producto-content">
+<h3>Papel celofán</h3>
+<p>Papel celofán de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$43.93</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(39)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(39)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cartulinas (paquete surtido)" src="img/producto40.jpg"/>
+<div class="producto-content">
+<h3>Cartulinas (paquete surtido)</h3>
+<p>Cartulinas (paquete surtido) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$44.8</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(40)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(40)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Tijeras escolares" src="img/producto41.jpg"/>
+<div class="producto-content">
+<h3>Tijeras escolares</h3>
+<p>Tijeras escolares de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$45.67</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(41)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(41)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cutter" src="img/producto42.jpg"/>
+<div class="producto-content">
+<h3>Cutter</h3>
+<p>Cutter de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$46.54</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(42)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(42)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Resistol blanco" src="img/producto43.jpg"/>
+<div class="producto-content">
+<h3>Resistol blanco</h3>
+<p>Resistol blanco de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$47.41</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(43)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(43)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Pritt barra" src="img/producto44.jpg"/>
+<div class="producto-content">
+<h3>Pritt barra</h3>
+<p>Pritt barra de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$48.28</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(44)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(44)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cinta adhesiva transparente" src="img/producto45.jpg"/>
+<div class="producto-content">
+<h3>Cinta adhesiva transparente</h3>
+<p>Cinta adhesiva transparente de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$49.15</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(45)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(45)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cinta masking tape" src="img/producto46.jpg"/>
+<div class="producto-content">
+<h3>Cinta masking tape</h3>
+<p>Cinta masking tape de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$50.02</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(46)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(46)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cinta doble cara" src="img/producto47.jpg"/>
+<div class="producto-content">
+<h3>Cinta doble cara</h3>
+<p>Cinta doble cara de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$50.89</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(47)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(47)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Silicón líquido" src="img/producto48.jpg"/>
+<div class="producto-content">
+<h3>Silicón líquido</h3>
+<p>Silicón líquido de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$51.76</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(48)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(48)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Pistola de silicón" src="img/producto49.jpg"/>
+<div class="producto-content">
+<h3>Pistola de silicón</h3>
+<p>Pistola de silicón de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$52.63</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(49)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(49)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Repuesto de barras de silicón" src="img/producto50.jpg"/>
+<div class="producto-content">
+<h3>Repuesto de barras de silicón</h3>
+<p>Repuesto de barras de silicón de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$53.5</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(50)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(50)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Archivador tamaño carta" src="img/producto51.jpg"/>
+<div class="producto-content">
+<h3>Archivador tamaño carta</h3>
+<p>Archivador tamaño carta de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$54.37</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(51)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(51)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Porta documentos" src="img/producto52.jpg"/>
+<div class="producto-content">
+<h3>Porta documentos</h3>
+<p>Porta documentos de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$55.24</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(52)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(52)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Folder manila" src="img/producto53.jpg"/>
+<div class="producto-content">
+<h3>Folder manila</h3>
+<p>Folder manila de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$56.11</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(53)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(53)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Folder plástico con broche" src="img/producto54.jpg"/>
+<div class="producto-content">
+<h3>Folder plástico con broche</h3>
+<p>Folder plástico con broche de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$56.98</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(54)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(54)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Porta lápices" src="img/producto55.jpg"/>
+<div class="producto-content">
+<h3>Porta lápices</h3>
+<p>Porta lápices de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$57.85</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(55)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(55)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Estuche escolar" src="img/producto56.jpg"/>
+<div class="producto-content">
+<h3>Estuche escolar</h3>
+<p>Estuche escolar de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$58.72</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(56)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(56)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Agenda escolar" src="img/producto57.jpg"/>
+<div class="producto-content">
+<h3>Agenda escolar</h3>
+<p>Agenda escolar de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$59.59</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(57)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(57)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Post-its" src="img/producto58.jpg"/>
+<div class="producto-content">
+<h3>Post-its</h3>
+<p>Post-its de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$60.46</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(58)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(58)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Clips metálicos" src="img/producto59.jpg"/>
+<div class="producto-content">
+<h3>Clips metálicos</h3>
+<p>Clips metálicos de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$61.33</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(59)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(59)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Gomas elásticas" src="img/producto60.jpg"/>
+<div class="producto-content">
+<h3>Gomas elásticas</h3>
+<p>Gomas elásticas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$62.2</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(60)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(60)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Calculadora básica" src="img/producto61.jpg"/>
+<div class="producto-content">
+<h3>Calculadora básica</h3>
+<p>Calculadora básica de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$63.07</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(61)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(61)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Calculadora científica" src="img/producto62.jpg"/>
+<div class="producto-content">
+<h3>Calculadora científica</h3>
+<p>Calculadora científica de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$63.94</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(62)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(62)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="USB 16 GB" src="img/producto63.jpg"/>
+<div class="producto-content">
+<h3>USB 16 GB</h3>
+<p>USB 16 GB de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$64.81</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(63)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(63)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="USB 32 GB" src="img/producto64.jpg"/>
+<div class="producto-content">
+<h3>USB 32 GB</h3>
+<p>USB 32 GB de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$65.68</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(64)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(64)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Mouse inalámbrico" src="img/producto65.jpg"/>
+<div class="producto-content">
+<h3>Mouse inalámbrico</h3>
+<p>Mouse inalámbrico de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$66.55</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(65)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(65)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Teclado básico" src="img/producto66.jpg"/>
+<div class="producto-content">
+<h3>Teclado básico</h3>
+<p>Teclado básico de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$67.42</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(66)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(66)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Audífonos económicos" src="img/producto67.jpg"/>
+<div class="producto-content">
+<h3>Audífonos económicos</h3>
+<p>Audífonos económicos de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$68.29</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(67)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(67)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Bocina bluetooth pequeña" src="img/producto68.jpg"/>
+<div class="producto-content">
+<h3>Bocina bluetooth pequeña</h3>
+<p>Bocina bluetooth pequeña de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$69.16</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(68)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(68)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Lámpara de escritorio LED" src="img/producto69.jpg"/>
+<div class="producto-content">
+<h3>Lámpara de escritorio LED</h3>
+<p>Lámpara de escritorio LED de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$70.03</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(69)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(69)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cargador USB" src="img/producto70.jpg"/>
+<div class="producto-content">
+<h3>Cargador USB</h3>
+<p>Cargador USB de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$70.9</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(70)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(70)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Gel antibacterial" src="img/producto71.jpg"/>
+<div class="producto-content">
+<h3>Gel antibacterial</h3>
+<p>Gel antibacterial de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$71.77</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(71)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(71)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Toallitas húmedas" src="img/producto72.jpg"/>
+<div class="producto-content">
+<h3>Toallitas húmedas</h3>
+<p>Toallitas húmedas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$72.64</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(72)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(72)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cubrebocas desechables" src="img/producto73.jpg"/>
+<div class="producto-content">
+<h3>Cubrebocas desechables</h3>
+<p>Cubrebocas desechables de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$73.51</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(73)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(73)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Caja de pañuelos" src="img/producto74.jpg"/>
+<div class="producto-content">
+<h3>Caja de pañuelos</h3>
+<p>Caja de pañuelos de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$74.38</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(74)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(74)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Spray desinfectante" src="img/producto75.jpg"/>
+<div class="producto-content">
+<h3>Spray desinfectante</h3>
+<p>Spray desinfectante de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$75.25</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(75)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(75)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Termómetro digital" src="img/producto76.jpg"/>
+<div class="producto-content">
+<h3>Termómetro digital</h3>
+<p>Termómetro digital de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$76.12</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(76)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(76)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Careta de plástico" src="img/producto77.jpg"/>
+<div class="producto-content">
+<h3>Careta de plástico</h3>
+<p>Careta de plástico de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$76.99</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(77)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(77)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Botella de agua reutilizable" src="img/producto78.jpg"/>
+<div class="producto-content">
+<h3>Botella de agua reutilizable</h3>
+<p>Botella de agua reutilizable de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$77.86</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(78)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(78)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Etiquetas escolares" src="img/producto79.jpg"/>
+<div class="producto-content">
+<h3>Etiquetas escolares</h3>
+<p>Etiquetas escolares de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$78.73</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(79)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(79)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Porta credencial" src="img/producto80.jpg"/>
+<div class="producto-content">
+<h3>Porta credencial</h3>
+<p>Porta credencial de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$79.6</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(80)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(80)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Washi tape" src="img/producto81.jpg"/>
+<div class="producto-content">
+<h3>Washi tape</h3>
+<p>Washi tape de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$80.47</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(81)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(81)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Stickers decorativos" src="img/producto82.jpg"/>
+<div class="producto-content">
+<h3>Stickers decorativos</h3>
+<p>Stickers decorativos de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$81.34</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(82)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(82)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Etiquetas adhesivas" src="img/producto83.jpg"/>
+<div class="producto-content">
+<h3>Etiquetas adhesivas</h3>
+<p>Etiquetas adhesivas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$82.21</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(83)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(83)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Foamy con glitter" src="img/producto84.jpg"/>
+<div class="producto-content">
+<h3>Foamy con glitter</h3>
+<p>Foamy con glitter de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$83.08</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(84)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(84)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Letras autoadheribles" src="img/producto85.jpg"/>
+<div class="producto-content">
+<h3>Letras autoadheribles</h3>
+<p>Letras autoadheribles de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$83.95</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(85)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(85)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Sellos de caritas" src="img/producto86.jpg"/>
+<div class="producto-content">
+<h3>Sellos de caritas</h3>
+<p>Sellos de caritas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$84.82</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(86)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(86)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Estampas motivacionales" src="img/producto87.jpg"/>
+<div class="producto-content">
+<h3>Estampas motivacionales</h3>
+<p>Estampas motivacionales de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$85.69</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(87)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(87)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Cinta decorativa" src="img/producto88.jpg"/>
+<div class="producto-content">
+<h3>Cinta decorativa</h3>
+<p>Cinta decorativa de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$86.56</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(88)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(88)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Botones decorativos" src="img/producto89.jpg"/>
+<div class="producto-content">
+<h3>Botones decorativos</h3>
+<p>Botones decorativos de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$87.43</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(89)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(89)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Perforadora de figuras" src="img/producto90.jpg"/>
+<div class="producto-content">
+<h3>Perforadora de figuras</h3>
+<p>Perforadora de figuras de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$88.3</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(90)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(90)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Sacapuntas metálico" src="img/producto91.jpg"/>
+<div class="producto-content">
+<h3>Sacapuntas metálico</h3>
+<p>Sacapuntas metálico de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$89.17</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(91)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(91)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Goma de borrar" src="img/producto92.jpg"/>
+<div class="producto-content">
+<h3>Goma de borrar</h3>
+<p>Goma de borrar de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$90.04</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(92)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(92)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Goma con figura" src="img/producto93.jpg"/>
+<div class="producto-content">
+<h3>Goma con figura</h3>
+<p>Goma con figura de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$90.91</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(93)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(93)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Grapadora" src="img/producto94.jpg"/>
+<div class="producto-content">
+<h3>Grapadora</h3>
+<p>Grapadora de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$91.78</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(94)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(94)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Caja de grapas" src="img/producto95.jpg"/>
+<div class="producto-content">
+<h3>Caja de grapas</h3>
+<p>Caja de grapas de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$92.65</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(95)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(95)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Desengrapadora" src="img/producto96.jpg"/>
+<div class="producto-content">
+<h3>Desengrapadora</h3>
+<p>Desengrapadora de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$93.52</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(96)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(96)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Abatelenguas de madera (manualidades)" src="img/producto97.jpg"/>
+<div class="producto-content">
+<h3>Abatelenguas de madera (manualidades)</h3>
+<p>Abatelenguas de madera (manualidades) de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$94.39</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(97)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(97)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Lupa escolar" src="img/producto98.jpg"/>
+<div class="producto-content">
+<h3>Lupa escolar</h3>
+<p>Lupa escolar de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$95.26</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(98)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(98)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Imanes escolares" src="img/producto99.jpg"/>
+<div class="producto-content">
+<h3>Imanes escolares</h3>
+<p>Imanes escolares de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$96.13</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(99)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(99)">Agregar</button>
+</div>
+</div>
+<div class="producto">
+<img alt="Timbre escolar" src="img/producto100.jpg"/>
+<div class="producto-content">
+<h3>Timbre escolar</h3>
+<p>Timbre escolar de excelente calidad, ideal para estudiantes y uso diario.</p>
+<div class="precio">$97.0</div>
+<button class="btn btn-secondary" onclick="toggleFavorito(100)">❤️</button>
+<button class="btn btn-primary" onclick="agregarCarrito(100)">Agregar</button>
+</div>
+</div>
+</div>
+</section>
+<section id="contacto" style="display:none;">
+<div class="card">
+<h2>Contacto</h2>
+<p><strong>Dirección:</strong> CECyTEM Plantel Ecatepec - Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca, 55020 Ecatepec de Morelos, México</p>
+<p><strong>Email:</strong> contacto@grupo412.com</p>
+<p><strong>WhatsApp:</strong> <a href="https://wa.me/525515764800" target="_blank">Enviar mensaje</a></p>
+<iframe allowfullscreen="" height="300" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3760.175774453522!2d-99.02816832418825!3d19.531890281765998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f0b10558839d%3A0x69d8ae8bcb16496!2sCECyTEM%20Plantel%20Ecatepec!5e0!3m2!1ses!2smx!4v1718472000000!5m2!1ses!2smx" style="border:0;" width="100%">
+</iframe>
+</div>
+</section>
 </main>
-
-<!-- Carrito -->
-<aside class="carrito" style="display:none;"
-  <h2>🛒 Carrito de Compra</h2>
-  <ul class="lista-carrito" id="lista-carrito"></ul>
-  <div class="total-carrito">
-    <strong>Total: $<span id="total">0.00</span></strong>
-  </div>
-  <button id="finalizar" class="btn btn-accent" style="width: 100%;">Finalizar Venta</button>
-</aside>
-
-<footer>
-  &copy; 2025 Grupo 412 - Todos los derechos reservados
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-  // Productos (100 productos con img, nombre y descripción)
-  
-
-  // Variables de paginación
-  const productos = [
-  { id: 1, nombre: `Sacapuntas doble #1`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `68.96`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 2, nombre: `Cinta adhesiva #2`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `50.79`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 3, nombre: `Cuaderno profesional #3`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `5.89`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 4, nombre: `Goma de borrar #4`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `14.44`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 5, nombre: `Colores de madera #5`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `11.54`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 6, nombre: `Clip sujetapapeles #6`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `41.85`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 7, nombre: `Bolígrafo azul #7`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `11.35`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 8, nombre: `Sacapuntas doble #8`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `40.68`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 9, nombre: `Engrapadora mediana #9`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `79.54`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 10, nombre: `Pluma estilográfica #10`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `23.58`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 11, nombre: `Cinta doble cara #11`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `65.80`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 12, nombre: `Notas adhesivas #12`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `61.68`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 13, nombre: `Hojas recicladas #13`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `75.84`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 14, nombre: `Resaltador fluorescente #14`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `41.66`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 15, nombre: `Juego de geometría #15`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `20.39`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 16, nombre: `Goma de borrar #16`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `46.54`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 17, nombre: `Block de hojas blancas #17`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `46.30`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 18, nombre: `Bolígrafo azul #18`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `51.88`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 19, nombre: `Etiquetas escolares #19`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `42.69`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 20, nombre: `Marcadores permanentes #20`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `51.33`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 21, nombre: `Resaltador fluorescente #21`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `60.43`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 22, nombre: `Etiquetas escolares #22`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `34.91`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 23, nombre: `Bolígrafo azul #23`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `33.79`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 24, nombre: `Estuche escolar #24`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `51.26`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 25, nombre: `Plumones para pizarrón #25`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `49.24`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 26, nombre: `Hojas recicladas #26`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `56.99`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 27, nombre: `Caja organizadora #27`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `63.26`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 28, nombre: `Marcadores permanentes #28`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `11.53`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 29, nombre: `Caja organizadora #29`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `60.94`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 30, nombre: `Bolígrafo azul #30`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `43.26`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 31, nombre: `Cuaderno profesional #31`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `44.03`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 32, nombre: `Carpeta tamaño carta #32`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `30.83`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 33, nombre: `Juego de geometría #33`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `79.70`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 34, nombre: `Goma de borrar #34`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `36.23`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 35, nombre: `Cinta adhesiva #35`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `46.36`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 36, nombre: `Hojas recicladas #36`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `47.60`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 37, nombre: `Resaltador fluorescente #37`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `36.99`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 38, nombre: `Tijeras escolares #38`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `77.72`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 39, nombre: `Carpeta tamaño carta #39`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `68.56`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 40, nombre: `Hojas recicladas #40`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `6.77`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 41, nombre: `Juego de geometría #41`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `55.44`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 42, nombre: `Corrector líquido #42`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `72.03`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 43, nombre: `Notas adhesivas #43`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `6.84`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 44, nombre: `Plumones para pizarrón #44`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `77.97`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 45, nombre: `Hojas recicladas #45`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `67.25`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 46, nombre: `Resaltador fluorescente #46`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `63.30`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 47, nombre: `Pegamento en barra #47`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `72.42`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 48, nombre: `Marcadores permanentes #48`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `26.32`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 49, nombre: `Pegamento en barra #49`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `53.86`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 50, nombre: `Resaltador fluorescente #50`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `8.72`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 51, nombre: `Pegamento en barra #51`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `70.84`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 52, nombre: `Lápiz HB #52`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `66.86`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 53, nombre: `Marcadores de pizarra #53`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `23.61`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 54, nombre: `Goma de borrar #54`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `52.02`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 55, nombre: `Block de hojas blancas #55`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `31.59`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 56, nombre: `Marcadores de pizarra #56`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `64.22`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 57, nombre: `Cuaderno profesional #57`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `75.28`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 58, nombre: `Corrector líquido #58`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `31.76`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 59, nombre: `Marcadores de pizarra #59`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `24.32`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 60, nombre: `Tijeras escolares #60`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `69.50`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 61, nombre: `Cuaderno profesional #61`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `74.37`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 62, nombre: `Compás metálico #62`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `61.60`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 63, nombre: `Cuaderno profesional #63`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `39.70`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 64, nombre: `Cinta doble cara #64`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `54.36`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 65, nombre: `Marcadores de pizarra #65`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `20.91`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 66, nombre: `Pluma estilográfica #66`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `11.92`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 67, nombre: `Hojas recicladas #67`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `39.42`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 68, nombre: `Clip sujetapapeles #68`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `77.44`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 69, nombre: `Plumones para pizarrón #69`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `42.56`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 70, nombre: `Cinta adhesiva #70`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `68.49`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 71, nombre: `Pegamento en barra #71`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `72.41`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 72, nombre: `Plumones para pizarrón #72`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `30.78`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 73, nombre: `Marcadores permanentes #73`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `65.01`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 74, nombre: `Lápiz HB #74`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `5.06`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 75, nombre: `Bolígrafo azul #75`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `41.74`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 76, nombre: `Engrapadora mediana #76`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `27.15`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 77, nombre: `Pegamento en barra #77`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `18.68`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 78, nombre: `Pegamento en barra #78`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `51.29`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 79, nombre: `Bolígrafo azul #79`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `25.02`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 80, nombre: `Corrector líquido #80`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `11.11`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 81, nombre: `Colores de madera #81`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `53.40`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 82, nombre: `Plumones para pizarrón #82`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `36.00`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 83, nombre: `Bolígrafo azul #83`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `17.24`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 84, nombre: `Compás metálico #84`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `6.28`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 85, nombre: `Clip sujetapapeles #85`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `79.26`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 86, nombre: `Cartulina blanca #86`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `45.67`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 87, nombre: `Plumones para pizarrón #87`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `61.02`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 88, nombre: `Marcadores de pizarra #88`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `11.01`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 89, nombre: `Plumones para pizarrón #89`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `14.64`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 90, nombre: `Sacapuntas doble #90`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `18.71`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-  { id: 91, nombre: `Hojas recicladas #91`, descripcion: `Este producto es ideal para estudiantes, maestros y profesionales que requieren una herramienta confiable para sus tareas diarias. Fabricado con materiales resistentes para un uso prolongado.`, precio: `12.08`, img: `https://cdn.pixabay.com/photo/2017/02/01/10/29/pencil-2023567_1280.jpg` },
-  { id: 92, nombre: `Carpeta tamaño carta #92`, descripcion: `Perfecto para mantener tus materiales organizados y listos para usarse en cualquier momento. Ideal para el hogar, la oficina o la escuela.`, precio: `27.69`, img: `https://cdn.pixabay.com/photo/2015/09/05/20/02/office-924068_1280.jpg` },
-  { id: 93, nombre: `Cuaderno profesional #93`, descripcion: `Diseñado con precisión para ofrecer la mejor experiencia de escritura o dibujo. Su diseño ergonómico permite un uso cómodo durante horas.`, precio: `29.67`, img: `https://cdn.pixabay.com/photo/2017/08/10/03/29/paper-2619013_1280.jpg` },
-  { id: 94, nombre: `Pluma estilográfica #94`, descripcion: `Una herramienta esencial que no puede faltar en tu escritorio. Su practicidad y eficiencia lo convierten en un artículo indispensable.`, precio: `6.31`, img: `https://cdn.pixabay.com/photo/2016/03/09/09/30/desk-1245959_1280.jpg` },
-  { id: 95, nombre: `Resaltador fluorescente #95`, descripcion: `Con una excelente relación calidad-precio, este producto cumple con los estándares más altos de durabilidad y funcionalidad.`, precio: `39.67`, img: `https://cdn.pixabay.com/photo/2017/08/06/05/46/school-2596090_1280.jpg` },
-  { id: 96, nombre: `Pluma estilográfica #96`, descripcion: `Su diseño moderno y atractivo lo hace ideal para jóvenes y adultos que buscan estilo y eficiencia en sus útiles escolares.`, precio: `66.76`, img: `https://cdn.pixabay.com/photo/2017/05/10/17/41/school-2308041_1280.jpg` },
-  { id: 97, nombre: `Cuaderno profesional #97`, descripcion: `Versátil y fácil de usar, se adapta a diferentes necesidades, ya sea para tomar notas, realizar proyectos o trabajos creativos.`, precio: `57.41`, img: `https://cdn.pixabay.com/photo/2016/12/06/18/27/agenda-1887012_1280.jpg` },
-  { id: 98, nombre: `Juego de geometría #98`, descripcion: `Fabricado con materiales reciclables, es una excelente opción para quienes buscan cuidar el medio ambiente sin sacrificar calidad.`, precio: `6.96`, img: `https://cdn.pixabay.com/photo/2014/08/26/15/28/stationery-428620_1280.jpg` },
-  { id: 99, nombre: `Libreta cuadriculada #99`, descripcion: `Sus características lo hacen perfecto para presentaciones, tareas escolares y trabajos de oficina, brindando siempre los mejores resultados.`, precio: `46.57`, img: `https://cdn.pixabay.com/photo/2016/11/21/12/42/notebook-1840276_1280.jpg` },
-  { id: 100, nombre: `Tijeras escolares #100`, descripcion: `Un producto confiable que ha sido probado por miles de usuarios satisfechos. Una excelente adición a tu colección de papelería.`, precio: `37.24`, img: `https://cdn.pixabay.com/photo/2016/03/26/13/09/notebooks-1281847_1280.jpg` },
-];
-
-const productsPorPagina = 12;
-  let paginaActual = 1;
-  const totalPaginas = Math.ceil(productos.length / productsPorPagina);
-
-  // Mostrar productos con paginación
-  function mostrarProductos(pagina = 1) {
-    const catalogoDiv = document.getElementById('catalogo-productos');
-    catalogoDiv.innerHTML = '';
-    
-    const inicio = (pagina - 1) * productsPorPagina;
-    const fin = inicio + productsPorPagina;
-    const productosAPagina = productos.slice(inicio, fin);
-    
-    productosAPagina.forEach(p => {
-      const div = document.createElement('div');
-      div.className = 'producto';
-      div.innerHTML = `
-        <img src="${p.img}" alt="${p.nombre}" />
-        <div class="producto-content">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <div class="precio">$${p.precio}</div>
-          <button onclick="toggleFavorito(${p.id})" class="btn btn-secondary" style="margin-bottom: 0.5rem;">❤️</button>
-          <button onclick="agregarCarrito(${p.id})" class="btn btn-primary">Agregar al carrito</button>
-        </div>
-      `;
-      catalogoDiv.appendChild(div);
-    });
-    
-    mostrarPaginacion();
-  }
-
-  // Mostrar paginación
-  function mostrarPaginacion() {
-    const paginationDiv = document.getElementById('pagination');
-    paginationDiv.innerHTML = '';
-    
-    // Botón anterior
-    const btnAnterior = document.createElement('button');
-    btnAnterior.textContent = '← Anterior';
-    btnAnterior.disabled = paginaActual === 1;
-    btnAnterior.onclick = () => cambiarPagina(paginaActual - 1);
-    paginationDiv.appendChild(btnAnterior);
-    
-    // Botones de números de página
-    for(let i = 1; i <= totalPaginas; i++) {
-      if(i === 1 || i === totalPaginas || (i >= paginaActual - 2 && i <= paginaActual + 2)) {
-        const btnPagina = document.createElement('button');
-        btnPagina.textContent = i;
-        btnPagina.className = i === paginaActual ? 'active' : '';
-        btnPagina.onclick = () => cambiarPagina(i);
-        paginationDiv.appendChild(btnPagina);
-      } else if(i === paginaActual - 3 || i === paginaActual + 3) {
-        const span = document.createElement('span');
-        span.textContent = '...';
-        span.style.padding = '0.5rem';
-        paginationDiv.appendChild(span);
-      }
-    }
-    
-    // Botón siguiente
-    const btnSiguiente = document.createElement('button');
-    btnSiguiente.textContent = 'Siguiente →';
-    btnSiguiente.disabled = paginaActual === totalPaginas;
-    btnSiguiente.onclick = () => cambiarPagina(paginaActual + 1);
-    paginationDiv.appendChild(btnSiguiente);
-  }
-
-  // Cambiar página
-  function cambiarPagina(nuevaPagina) {
-    if(nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
-      paginaActual = nuevaPagina;
-      mostrarProductos(paginaActual);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-
-  // Manejo de secciones
   function mostrarSeccion(seccion) {
-    // Ocultar todas las secciones
-    document.querySelectorAll('main > section').forEach(sec => {
-      sec.style.display = 'none';
-    });
-    
-    // Mostrar la sección seleccionada
+    document.querySelectorAll('main > section').forEach(sec => sec.style.display = 'none');
     document.getElementById(seccion).style.display = 'block';
-    
-    // Actualizar navegación activa
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
+    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
     document.querySelector(`[onclick="mostrarSeccion('${seccion}')"]`).classList.add('active');
-    
-    // Si es catálogo, mostrar productos
-    if(seccion === 'catalogo') {
-      mostrarProductos(1);
-      paginaActual = 1;
-    }
   }
-
-  // Carrito
-  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-  function actualizarCarrito() {
-    const lista = document.getElementById('lista-carrito');
-    lista.innerHTML = '';
-    let total = 0;
-    
-    if(carrito.length === 0) {
-      lista.innerHTML = '<li style="text-align: center; color: #6b7280; padding: 2rem;">El carrito está vacío</li>';
-    } else {
-      carrito.forEach(item => {
-        const p = productos.find(prod => prod.id === item.id);
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <img src="${p.img}" alt="${p.nombre}">
-          <div class="info">
-            <p><strong>${p.nombre}</strong></p>
-            <p>Cantidad: ${item.cantidad}</p>
-          </div>
-          <div class="precio">$${(p.precio * item.cantidad).toFixed(2)}</div>
-          <button class="borrar" onclick="quitarDelCarrito(${p.id})" title="Eliminar">×</button>
-        `;
-        lista.appendChild(li);
-        total += p.precio * item.cantidad;
-      });
-    }
-    
-    document.getElementById('total').textContent = total.toFixed(2);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-  }
-
-  function agregarCarrito(id) {
-    const index = carrito.findIndex(item => item.id === id);
-    if(index > -1) {
-      carrito[index].cantidad++;
-    } else {
-      carrito.push({id, cantidad: 1});
-    }
-    actualizarCarrito();
-    
-    // Mostrar notificación
-    const producto = productos.find(p => p.id === id);
-    mostrarNotificacion(`${producto.nombre} agregado al carrito`);
-  }
-
-  function quitarDelCarrito(id) {
-    const producto = productos.find(p => p.id === id);
-    carrito = carrito.filter(item => item.id !== id);
-    actualizarCarrito();
-    mostrarNotificacion(`${producto.nombre} eliminado del carrito`);
-  }
-
-  function mostrarNotificacion(mensaje) {
-    const notif = document.createElement('div');
-    notif.style.cssText = `
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background: var(--accent-color);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: var(--shadow-lg);
-      z-index: 10000;
-      animation: slideIn 0.3s ease;
-    `;
-    notif.textContent = mensaje;
-    document.body.appendChild(notif);
-    
-    setTimeout(() => {
-      notif.remove();
-    }, 3000);
-  }
-
   
-  let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-  function toggleFavorito(id) {
-    const index = favoritos.indexOf(id);
-    if (index === -1) {
-      favoritos.push(id);
-      mostrarNotificacion('Agregado a favoritos ❤️');
-    } else {
-      favoritos.splice(index, 1);
-      mostrarNotificacion('Eliminado de favoritos 💔');
-    }
-    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+  function agregarCarrito(id) {
+    const nombre = document.querySelectorAll(".producto h3")[id - 1].textContent;
+    const precioTexto = document.querySelectorAll(".producto .precio")[id - 1].textContent;
+    const precio = parseFloat(precioTexto.replace('$', ''));
+    carrito.push({ nombre, precio });
+    mostrarCarrito(); // Solo actualiza carrito, no genera ticket
   }
+    
 
-  // Comentarios simples por producto
-  const comentarios = {};
-
-  function agregarComentario(id, texto) {
-    if (!comentarios[id]) comentarios[id] = [];
-    comentarios[id].push(texto);
-    mostrarNotificacion('Comentario agregado');
-    mostrarComentarios(id);
-  }
-
-  function mostrarComentarios(id) {
-    const contenedor = document.getElementById(`comentarios-${id}`);
-    if (!contenedor || !comentarios[id]) return;
-    contenedor.innerHTML = comentarios[id].map(c => `<p style="font-size: 0.8rem; color: #4b5563; margin: 0.3rem 0;">🗨️ ${c}</p>`).join('');
-  }
-
-
-  // Finalizar venta y generar PDF
-  document.getElementById('finalizar').addEventListener('click', () => {
-    if(carrito.length === 0) {
-      alert('El carrito está vacío.');
-      return;
-    }
-    generarPDF();
-  });
-
-  async function generarPDF() {
+  async function generarTicketPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Encabezado
-    doc.setFillColor(37, 99, 235);
-    doc.rect(0, 0, 210, 40, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(24);
-    doc.text('TICKET DE COMPRA', 105, 20, null, null, 'center');
-    doc.setFontSize(14);
-    doc.text('Grupo 412 - Mi Tienda', 105, 30, null, null, 'center');
+    let y = 10;
+    let subtotal = 0;
 
-    // Info comercio
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(10);
-    doc.text('CECyTEM Plantel Ecatepec', 20, 50);
-    doc.text('Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca', 20, 55);
-    doc.text('55020 Ecatepec de Morelos, México', 20, 60);
-
-    // Fecha y hora
-    const fechaHora = new Date().toLocaleString('es-MX');
-    doc.text(`Fecha: ${fechaHora}`, 140, 50);
-
-    doc.setDrawColor(37, 99, 235);
-    doc.line(20, 70, 190, 70);
-
-    let y = 85;
-    let total = 0;
-
-    // Tabla de productos
-    doc.setFontSize(12);
-    doc.setFont(undefined, 'bold');
-    doc.text('Producto', 20, y);
-    doc.text('Cant.', 120, y);
-    doc.text('Precio', 140, y);
-    doc.text('Subtotal', 170, y);
+    doc.setFontSize(16);
+    doc.text("TICKET DE COMPRA", 105, y, { align: "center" });
     y += 10;
-    doc.line(20, y - 2, 190, y - 2);
-    doc.setFont(undefined, 'normal');
+    doc.setFontSize(10);
+    doc.text("Grupo 412 - Mi Tienda", 105, y, { align: "center" });
+    y += 5;
+    doc.text("CECyTEM Plantel Ecatepec", 105, y, { align: "center" });
+    y += 5;
+    doc.text("Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca", 105, y, { align: "center" });
+    y += 5;
+    doc.text("55020 Ecatepec de Morelos, México", 105, y, { align: "center" });
+    y += 10;
 
-    carrito.forEach(item => {
-      const p = productos.find(prod => prod.id === item.id);
-      const subtotal = parseFloat(p.precio) * item.cantidad;
-
-      doc.text(p.nombre.substring(0, 25), 20, y);
-      doc.text(item.cantidad.toString(), 125, y);
-      doc.text(`$${p.precio}`, 145, y);
-      doc.text(`$${subtotal.toFixed(2)}`, 175, y);
-      y += 8;
-      total += subtotal;
+    carrito.forEach((item, index) => {
+      const line = `${index+1}. ${item.nombre} - $${item.precio.toFixed(2)}`;
+      doc.text(line, 10, y);
+      y += 7;
+      subtotal += item.precio;
     });
 
-    doc.line(20, y + 5, 190, y + 5);
-    y += 15;
-    doc.setFontSize(14);
-    doc.setFont(undefined, 'bold');
-    doc.text(`Subtotal: $${total.toFixed(2)}`, 140, y);
+    const iva = subtotal * 0.16;
+    const total = subtotal + iva;
 
-    // IVA y total con IVA
-    const iva = total * 0.16;
-    const totalConIVA = total + iva;
-    y += 10;
-    doc.text(`IVA (16%): $${iva.toFixed(2)}`, 140, y);
-    y += 10;
-    doc.text(`TOTAL CON IVA: $${totalConIVA.toFixed(2)}`, 140, y);
-
-    // Método de pago
-    y += 20;
-    doc.setFont(undefined, 'normal');
-    doc.setFontSize(11);
-    doc.text('Método de pago: Tarjeta de débito', 20, y);
-
-    // Número de transacción
-    const transaccion = Math.floor(100000 + Math.random() * 900000);
-    y += 8;
-    doc.text(`No. Transacción: ${transaccion}`, 20, y);
-
-    // WhatsApp
-    y += 10;
-    doc.text('Contáctanos: +52 55 1234 5678', 20, y);
+    y += 5;
+    doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 10, y);
     y += 7;
-    doc.textWithLink('Enviar mensaje por WhatsApp', 20, y, { url: 'https://wa.me/525512345678' });
+    doc.text(`IVA (16%): $${iva.toFixed(2)}`, 10, y);
+    y += 7;
+    doc.text(`TOTAL CON IVA: $${total.toFixed(2)}`, 10, y);
+    y += 7;
+    doc.text("Método de pago: Tarjeta de débito", 10, y);
+    y += 7;
+    doc.text("Transacción: 577801", 10, y);
+    y += 7;
+    doc.text("Gracias por su compra", 10, y);
 
-    // Agradecimiento
-    y += 20;
-    doc.setFontSize(12);
-    doc.text('¡Gracias por su compra!', 105, y, null, null, 'center');
-    doc.text('Grupo 412 - CECyTEM Plantel Ecatepec', 105, y + 10, null, null, 'center');
-
-    doc.save('ticket_compra.pdf');
-
-    carrito = [];
-    actualizarCarrito();
-    mostrarNotificacion('¡Compra realizada exitosamente!');
+    doc.save("ticket_compra.pdf");
   }
-
-  // Inicializar
-  document.addEventListener('DOMContentLoaded', () => {
-    actualizarCarrito();
-    mostrarProductos(1);
-  });
-
-  
-  // Mostrar/ocultar carrito
-  function toggleCarrito() {
-    const carrito = document.querySelector('aside.carrito');
-    carrito.style.display = (carrito.style.display === 'none' || carrito.style.display === '') ? 'block' : 'none';
-  }
-
-
-  
-  function toggleModo() {
-    const root = document.documentElement;
-    const modoActual = root.getAttribute('data-tema') || 'claro';
-    const nuevoModo = modoActual === 'claro' ? 'oscuro' : 'claro';
-    root.setAttribute('data-tema', nuevoModo);
-    localStorage.setItem('tema', nuevoModo);
-    aplicarTema(nuevoModo);
-  }
-
-  function aplicarTema(modo) {
-    const root = document.documentElement;
-    if (modo === 'oscuro') {
-      root.style.setProperty('--background', '#1f2937');
-      root.style.setProperty('--card-bg', '#374151');
-      root.style.setProperty('--text-dark', '#f9fafb');
-      root.style.setProperty('--text-light', '#d1d5db');
-    } else {
-      root.style.setProperty('--background', '#f8fafc');
-      root.style.setProperty('--card-bg', '#ffffff');
-      root.style.setProperty('--text-dark', '#1f2937');
-      root.style.setProperty('--text-light', '#6b7280');
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const modoGuardado = localStorage.getItem('tema') || 'claro';
-    document.documentElement.setAttribute('data-tema', modoGuardado);
-    aplicarTema(modoGuardado);
-  });
-
-
-  // Añadir animaciones CSS dinámicamente
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-  `;
-  document.head.appendChild(style);
-
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  const carrito = [];
 
+  function agregarCarrito(id) {
+    const nombre = document.querySelectorAll(".producto h3")[id - 1].textContent;
+    const precioTexto = document.querySelectorAll(".producto .precio")[id - 1].textContent;
+    const precio = parseFloat(precioTexto.replace('$', ''));
+    carrito.push({ nombre, precio });
+    mostrarCarrito();
+  }
 
-<!-- Botón flotante para mostrar/ocultar carrito -->
-<button onclick="toggleCarrito()" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 1.5rem;
-  box-shadow: var(--shadow-lg);
-  cursor: pointer;
-  z-index: 1100;
-" title="Mostrar/Ocultar carrito">🛒</button>
+  function eliminarProducto(index) {
+    carrito.splice(index, 1);
+    mostrarCarrito();
+  }
 
+  function mostrarCarrito() {
+    let html = '<h3>Carrito de Compras</h3><ul>';
+    carrito.forEach((item, index) => {
+      html += `<li>${item.nombre} - $${item.precio.toFixed(2)} <button onclick="eliminarProducto(${index})">❌</button></li>`;
+    });
+    html += '</ul><button onclick="finalizarVenta()">🧾 Finalizar Venta</button>';
+    document.getElementById("carrito-container").innerHTML = html;
+  }
 
-<!-- Botón modo oscuro/claro -->
-<button onclick="toggleModo()" style="
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  background-color: var(--text-dark);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.2rem;
-  box-shadow: var(--shadow-lg);
-  cursor: pointer;
-  z-index: 1100;
-" title="Cambiar modo">🌗</button>
+  
+async function finalizarVenta() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
+  let y = 10;
+  let subtotal = 0;
+
+  doc.setFont("courier", "bold");
+  doc.setFontSize(14);
+  doc.text("TICKET DE COMPRA", 105, y, { align: "center" });
+
+  y += 10;
+  doc.setFontSize(10);
+  doc.text("Grupo 412 - Mi Tienda", 105, y, { align: "center" });
+  y += 5;
+  doc.text("CECyTEM Plantel Ecatepec", 105, y, { align: "center" });
+  y += 5;
+  doc.text("Calle Sor Juana Inés de la Cruz S/N, Tierra Blanca", 105, y, { align: "center" });
+  y += 5;
+  doc.text("55020 Ecatepec de Morelos, México", 105, y, { align: "center" });
+
+  y += 10;
+  doc.setDrawColor(0);
+  doc.line(10, y, 200, y); // línea horizontal
+  y += 6;
+
+  doc.setFont("courier", "normal");
+  carrito.forEach((item, index) => {
+    const line = `${index + 1}. ${item.nombre.padEnd(35)} $${item.precio.toFixed(2).padStart(6)}`;
+    doc.text(line, 10, y);
+    y += 6;
+    subtotal += item.precio;
+  });
+
+  const iva = subtotal * 0.16;
+  const total = subtotal + iva;
+
+  y += 4;
+  doc.line(10, y, 200, y);
+  y += 6;
+
+  doc.setFont("courier", "bold");
+  doc.text(`Subtotal:`.padEnd(40) + `$${subtotal.toFixed(2)}`, 10, y);
+  y += 6;
+  doc.text(`IVA (16%):`.padEnd(40) + `$${iva.toFixed(2)}`, 10, y);
+  y += 6;
+  doc.text(`TOTAL CON IVA:`.padEnd(40) + `$${total.toFixed(2)}`, 10, y);
+  y += 10;
+
+  doc.setFont("courier", "normal");
+  doc.text("Método de pago: Tarjeta de débito", 10, y);
+  y += 6;
+  doc.text("Transacción: 577801", 10, y);
+  y += 6;
+  doc.text("Gracias por su compra", 10, y);
+
+  doc.save("ticket_compra.pdf");
+  carrito.length = 0;
+  mostrarCarrito();
+}
+    
+</script>
+<div id="carrito-container" style="position: fixed; bottom: 6rem; right: 1rem; background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; width: 300px; z-index: 9999; display: block;"></div>
 </body>
 </html>
